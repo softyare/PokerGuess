@@ -13,7 +13,7 @@ namespace PokerGuess
 		{
 			InitializeComponent();
 
-			MainPage = new PokerGuess.MainPage();
+			MainPage = new PokerGuess.Views.TablePage();
 		}
 
 		protected override void OnStart ()
