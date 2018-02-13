@@ -61,6 +61,58 @@
     <None Remove="Resources\CardImages\queen_of_hearts.png" />
     <None Remove="Resources\CardImages\queen_of_spades.png" />
     <None Remove="Resources\CardImages\red_joker.png" />
+    <None Remove="Resources\SmallCardImages\10_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\10_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\10_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\10_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\2_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\2_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\2_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\2_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\3_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\3_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\3_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\3_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\4_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\4_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\4_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\4_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\5_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\5_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\5_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\5_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\6_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\6_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\6_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\6_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\7_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\7_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\7_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\7_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\8_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\8_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\8_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\8_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\9_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\9_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\9_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\9_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\ace_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\ace_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\ace_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\ace_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\jack_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\jack_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\jack_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\jack_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\king_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\king_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\king_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\king_of_spades.png" />
+    <None Remove="Resources\SmallCardImages\queen_of_clubs.png" />
+    <None Remove="Resources\SmallCardImages\queen_of_diamonds.png" />
+    <None Remove="Resources\SmallCardImages\queen_of_hearts.png" />
+    <None Remove="Resources\SmallCardImages\queen_of_spades.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,6 +172,58 @@
     <EmbeddedResource Include="Resources\CardImages\queen_of_hearts.png" />
     <EmbeddedResource Include="Resources\CardImages\queen_of_spades.png" />
     <EmbeddedResource Include="Resources\CardImages\red_joker.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\10_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\10_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\10_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\10_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\2_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\2_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\2_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\2_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\3_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\3_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\3_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\3_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\4_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\4_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\4_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\4_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\5_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\5_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\5_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\5_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\6_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\6_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\6_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\6_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\7_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\7_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\7_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\7_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\8_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\8_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\8_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\8_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\9_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\9_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\9_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\9_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\ace_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\ace_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\ace_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\ace_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\jack_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\jack_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\jack_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\jack_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\king_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\king_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\king_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\king_of_spades.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\queen_of_clubs.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\queen_of_diamonds.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\queen_of_hearts.png" />
+    <EmbeddedResource Include="Resources\SmallCardImages\queen_of_spades.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -130,9 +234,15 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\HoldemHandContentView.xaml.cs">
+      <DependentUpon>HoldemHandContentView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\HoldemHandContentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\TablePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

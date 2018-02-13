@@ -24,6 +24,47 @@ namespace PokerGuess.Models
                 return "PokerGuess.Resources.CardImages." + result + ".png";
             }
         }
+        public string SmallImagePath
+        {
+            get
+            {
+                var name = this.ToString();
+                var nameLow = name.ToLower();
+                var result = nameLow.Replace(" ", "_");
+                return "PokerGuess.Resources.SmallCardImages." + result + ".png";
+            }
+        }
+
+        public string ShortName
+        {
+            get
+            {
+                string shortName = Value.ToString();
+                if (Value > 9)
+                {
+                    switch (Value)
+                    {
+                        case 10:
+                            shortName = "T";
+                            break;
+                        case 11:
+                            shortName = "J";
+                            break;
+                        case 12:
+                            shortName = "Q";
+                            break;
+                        case 13:
+                            shortName = "K";
+                            break;
+                        case 14:
+                            shortName = "A";
+                            break;
+                    } 
+                }
+                     
+                return shortName;
+            }
+        }
 
         public override string ToString()
         {
