@@ -13,9 +13,8 @@ namespace PokerGuess.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HoldemHandContentView : ContentView
 	{
-		public HoldemHandContentView (HandViewVM vm)
+		public HoldemHandContentView ()
         {
-            BindingContext = vm;
             InitializeComponent ();
 		}
 	}

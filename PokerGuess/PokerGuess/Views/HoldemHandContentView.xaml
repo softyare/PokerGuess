@@ -1,22 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PokerGuess.Views.HoldemHandContentView">
+             x:Class="PokerGuess.Views.HoldemHandContentView"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+             >
   <ContentView.Content>
-        <StackLayout HorizontalOptions="Start" 
-                             VerticalOptions="Start"
+        <StackLayout HorizontalOptions="FillAndExpand" 
+                             VerticalOptions="FillAndExpand"
                              BackgroundColor="DarkGreen"
+                             MinimumWidthRequest="60"
                              Orientation="Horizontal">
-            <Image Source="{Binding FirstCardImage}" 
-                               WidthRequest="60"
+            <Image Source="{Binding Card1Image}" 
+                               WidthRequest="25"
                                Aspect="AspectFit"
                                Margin="5,5,1,5"
-                               HorizontalOptions="Start"/>
-            <Image Source="{Binding SecondCardImage}" 
-                               WidthRequest="60"
+                               HorizontalOptions="EndAndExpand"
+                                VerticalOptions="EndAndExpand"/>
+            <Image Source="{Binding Card2Image}" 
+                               WidthRequest="25"
                                Aspect="AspectFit"
                                Margin="1,5,5,5"
-                               HorizontalOptions="Start"/>
+                               HorizontalOptions="EndAndExpand"
+                                VerticalOptions="EndAndExpand"/>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

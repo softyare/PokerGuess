@@ -1,15 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PokerGuess.Views.TablePage"
+             x:Class="PokerGuess.Views.GamePage"
              xmlns:views="clr-namespace:PokerGuess.Views"
              Padding="5,15,5,5">
     <ContentPage.Content>
-        <StackLayout x:Name="Table"
+        <StackLayout x:Name="MainTableLayout"
                      BackgroundColor="ForestGreen" 
                      Padding="10" 
                      Orientation="Vertical"
                      >
+            <StackLayout VerticalOptions="Start">
+                <Button Text="Deal new hands" Command="{Binding DealNewRandomHandsCommand}" BackgroundColor="Wheat"/>
+            </StackLayout>
+            <views:TableContentView x:Name="TableCV" VerticalOptions="End" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -9,7 +9,6 @@ namespace PokerGuess.ViewModels
     public class HandViewVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -23,6 +22,8 @@ namespace PokerGuess.ViewModels
             {
                 _hand = value;
                 OnPropertyChanged(nameof(CurrnetHand));
+                OnPropertyChanged(nameof(Card1Image));
+                OnPropertyChanged(nameof(Card2Image));
             }
         }
 

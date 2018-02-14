@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:PokerGuess.Views"
+             x:Class="PokerGuess.Views.TableContentView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Text=" " Grid.Column="9" />
+        <views:HoldemHandContentView Grid.Column="2" Grid.Row="0" BindingContext="{Binding Hand1vm}"/>
+        <views:HoldemHandContentView Grid.Column="5" Grid.Row="0" BindingContext="{Binding Hand2vm}"/>
+        <views:HoldemHandContentView Grid.Column="8" Grid.Row="2" BindingContext="{Binding Hand3vm}"/>
+        <views:HoldemHandContentView Grid.Column="5" Grid.Row="4" BindingContext="{Binding Hand4vm}"/>
+        <views:HoldemHandContentView Grid.Column="2" Grid.Row="4" BindingContext="{Binding Hand5vm}"/>
+        <views:HoldemHandContentView Grid.Column="0" Grid.Row="2" BindingContext="{Binding Hand6vm}"/>
+    </Grid>
+</ContentView>

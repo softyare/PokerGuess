@@ -1,15 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace PokerGuess.Models
 {
     public enum HandType { non_holdem, pair, monster, suited, unsuited, connector, big, middle, small, mixed}
 
-    public class Hand
+    public class Hand : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public int IndexOnTable { get; set; }
-        public List<Card> Cards { get; set; }
+        private List<Card> _cards;
+        public List<Card> Cards { get { return _cards; }
+                                  set {
+                                        _cards = value;
+                                        OnPropertyChanged(nameof(Cards));
+                                      }
+        }
+
         public List<HandType> HandTypes
         {
             get
@@ -109,11 +123,11 @@ namespace PokerGuess.Models
                         string cardsPluralName;
                         if (card1.Value > 10)
                         {
-                            cardsPluralName = card1.ToString().ToLower() + "s";
+                            cardsPluralName = card1.ToString().ToLower().Split(char.Parse(" "))[0] + "s";
                         }
                         else
                         {
-                            cardsPluralName = card1.ToString() + "'s";
+                            cardsPluralName = card1.ToString().ToLower().Split(char.Parse(" "))[0] + "'s";
                         }
 
                         return "A pair of " + cardsPluralName;
