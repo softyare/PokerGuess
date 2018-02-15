@@ -22,10 +22,15 @@ namespace PokerGuess.Views
         public TableViewVM VM { get; set; }
         
         public TableContentView ()
-		{
+        {
+            InitializeComponent();
             VM = new TableViewVM();
             BindingContext = VM;
-            InitializeComponent ();
+            var CVVM = new CommunityViewVM();
+            VM.MainTable.Community = new CommunityCards();
+            CVVM.Community = VM.MainTable.Community;
+            VM.CommunityVM = CVVM;
+            CommunityContent.BindingContext = CVVM;
 		}
 	}
 

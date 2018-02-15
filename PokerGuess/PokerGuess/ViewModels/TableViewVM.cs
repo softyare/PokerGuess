@@ -14,6 +14,8 @@ namespace PokerGuess.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public CommunityViewVM CommunityVM { get; set; }
+
         public Table MainTable { get; set; }
 
         public HandViewVM Hand1vm { get; set; }

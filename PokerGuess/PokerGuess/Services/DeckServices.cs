@@ -46,6 +46,15 @@ namespace PokerGuess.Services
             }
         }
 
+        public static void ReturnCards(CommunityCards community, Deck deck)
+        {
+            foreach (Card c in community.Cards)
+            {
+                ReturnCard(c, deck);
+            }
+            community.Cards.Clear();
+        }
+
         public static Hand DrawHoldemHand(Deck deck)
         {
             Card c1 = DrawCard(deck);

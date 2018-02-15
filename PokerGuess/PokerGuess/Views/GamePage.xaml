@@ -10,8 +10,11 @@
                      Padding="10" 
                      Orientation="Vertical"
                      >
-            <StackLayout VerticalOptions="Start">
-                <Button Text="Deal new hands" Command="{Binding DealNewRandomHandsCommand}" BackgroundColor="Wheat"/>
+            <StackLayout VerticalOptions="Start" Orientation="Horizontal">
+                <Button Text="Hands" Command="{Binding DealNewRandomHandsCommand}" BackgroundColor="Wheat"/>
+                <Button Text="Flop" Command="{Binding DealFlopCommand}" BackgroundColor="Yellow"/>
+                <Button Text="Trun" Command="{Binding DealTurnCommand}" BackgroundColor="Green"/>
+                <Button Text="River" Command="{Binding DealRiverCommand}" BackgroundColor="Red"/>
             </StackLayout>
             <views:TableContentView x:Name="TableCV" VerticalOptions="End" />
         </StackLayout>

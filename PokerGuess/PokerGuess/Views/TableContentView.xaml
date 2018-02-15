@@ -15,20 +15,37 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Text=" " Grid.Column="9" />
-        <views:HoldemHandContentView Grid.Column="2" Grid.Row="0" BindingContext="{Binding Hand1vm}"/>
-        <views:HoldemHandContentView Grid.Column="5" Grid.Row="0" BindingContext="{Binding Hand2vm}"/>
-        <views:HoldemHandContentView Grid.Column="8" Grid.Row="2" BindingContext="{Binding Hand3vm}"/>
-        <views:HoldemHandContentView Grid.Column="5" Grid.Row="4" BindingContext="{Binding Hand4vm}"/>
-        <views:HoldemHandContentView Grid.Column="2" Grid.Row="4" BindingContext="{Binding Hand5vm}"/>
-        <views:HoldemHandContentView Grid.Column="0" Grid.Row="2" BindingContext="{Binding Hand6vm}"/>
+        <Label Text=" " Grid.Column="10" />
+        <views:HoldemHandContentView Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" BindingContext="{Binding Hand1vm}"/>
+        <Button FontSize="Micro" Text="Hand 1" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Command="SelectHandCommand" />
+        
+        <views:HoldemHandContentView Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="0" BindingContext="{Binding Hand2vm}"/>
+        <Button FontSize="Micro" Text="Hand 2" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" Command="SelectHandCommand" />
+        
+        <views:HoldemHandContentView Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="2" BindingContext="{Binding Hand3vm}"/>
+        <Button FontSize="Micro" Text="Hand 3" Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="3" Command="SelectHandCommand" />
+        
+        <views:HoldemHandContentView Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="4" BindingContext="{Binding Hand4vm}"/>
+        <Button FontSize="Micro" Text="Hand 4" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="5" Command="SelectHandCommand" />
+        
+        <views:HoldemHandContentView Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" BindingContext="{Binding Hand5vm}"/>
+        <Button FontSize="Micro" Text="Hand 5" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" Command="SelectHandCommand" />
+        
+        <views:HoldemHandContentView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" BindingContext="{Binding Hand6vm}"/>
+        <Button FontSize="Micro" Text="Hand 6" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Command="SelectHandCommand" />
+
+        <views:CommunityContentView x:Name="CommunityContent"  Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="4" />
     </Grid>
 </ContentView>

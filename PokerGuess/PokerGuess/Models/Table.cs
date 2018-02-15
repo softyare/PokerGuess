@@ -17,6 +17,7 @@ namespace PokerGuess.Models
         }
 
         public Deck DeckOfCards { get; set; }
+        public CommunityCards Community { get; set; }
         public int MaxHands { get; private set; }
         private TableState _state;
         public TableState State { get => _state;
@@ -43,6 +44,7 @@ namespace PokerGuess.Models
             State = TableState.Empty;
             MaxHands = maxHands;
             DeckOfCards = new Deck();
+            Community = new CommunityCards();
             DeckServices.Shuffle(DeckOfCards);
         }
     }
