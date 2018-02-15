@@ -33,8 +33,6 @@ namespace PokerGuess.ViewModels
                 State = TableState.Empty
             };
             Services.DeckServices.Shuffle(MainTable.DeckOfCards);
-            Services.TableServices.PutHandsOnTable(MainTable, new Random().Next(2, MainTable.MaxHands + 1));
-            RefreshHandViews();
         }
 
         public void RefreshHandViews()

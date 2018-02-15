@@ -25,12 +25,88 @@ namespace PokerGuess.ViewModels
         public Command DealRiverCommand { get; set; }
         public Command DealFlopCommand { get; set; }
 
+        private string handsInfoText;
+        public string HandsInfoText
+        {
+            get { return handsInfoText; }
+            set
+            {
+                handsInfoText = value;
+                OnPropertyChanged(nameof(HandsInfoText));
+            }
+        }
+
+        private string _mainButtonText;
+        public string MainButtonText
+        {
+            get { return _mainButtonText; }
+            set
+            {
+                _mainButtonText = value;
+                OnPropertyChanged(nameof(MainButtonText));
+            }
+        }
+
+        private Command _mainButtonCommand;
+        public Command MainButtonCommand
+        {
+            get { return _mainButtonCommand; }
+            set
+            {
+                _mainButtonCommand = value;
+                OnPropertyChanged(nameof(MainButtonCommand));
+            }
+        }
+
+        private Color _mainButtonBkgColor;
+        public Color MainButtonBkgColor
+        {
+            get { return _mainButtonBkgColor; }
+            set
+            {
+                _mainButtonBkgColor = value;
+                OnPropertyChanged(nameof(MainButtonBkgColor));
+            }
+        }
+
         public GamePageVM()
         {
             DealNewRandomHandsCommand = new Command(DealNewRandomHands);
             DealTurnCommand = new Command(DealTurn);
             DealRiverCommand = new Command(DealRiver);
             DealFlopCommand = new Command(DealFlop);
+        }
+
+        public void SetMainButton()
+        {
+            switch(tableVm.MainTable.State)
+            {
+                case TableState.Empty:
+                    MainButtonCommand = DealNewRandomHandsCommand;
+                    MainButtonText = "Deal new hands";
+                    MainButtonBkgColor = Color.Beige;
+                    break;
+                case TableState.PreFlop:
+                    MainButtonCommand = DealFlopCommand;
+                    MainButtonText = "Deal Flop";
+                    MainButtonBkgColor = Color.Yellow;
+                    break;
+                case TableState.Flop:
+                    MainButtonCommand = DealTurnCommand;
+                    MainButtonText = "Deal Turn";
+                    MainButtonBkgColor = Color.Orange;
+                    break;
+                case TableState.Turn:
+                    MainButtonCommand = DealRiverCommand;
+                    MainButtonText = "Deal River";
+                    MainButtonBkgColor = Color.PaleVioletRed;
+                    break;
+                case TableState.River:
+                    MainButtonCommand = DealNewRandomHandsCommand;
+                    MainButtonText = "Deal new hands";
+                    MainButtonBkgColor = Color.Beige;
+                    break;
+            }
         }
 
         private void DealNewRandomHands()
@@ -42,6 +118,8 @@ namespace PokerGuess.ViewModels
             tableVm.RefreshHandViews();
             tableVm.CommunityVM.RefreshImageSources();
             tableVm.MainTable.OnPropertyChanged(nameof(tableVm.MainTable.Hands));
+            tableVm.MainTable.State = TableState.PreFlop;
+            SetMainButton();
         }
 
         private void DealFlop()
@@ -49,18 +127,24 @@ namespace PokerGuess.ViewModels
             Services.TableServices.DealFlop(tableVm.MainTable);
             tableVm.OnPropertyChanged(nameof(tableVm.CommunityVM));
             tableVm.CommunityVM.RefreshImageSources();
+            tableVm.MainTable.State = TableState.Flop;
+            SetMainButton();
         }
         private void DealTurn()
         {
             Services.TableServices.DealTurn(tableVm.MainTable);
             tableVm.OnPropertyChanged(nameof(tableVm.CommunityVM));
             tableVm.CommunityVM.RefreshImageSources();
+            tableVm.MainTable.State = TableState.Turn;
+            SetMainButton();
         }
         private void DealRiver()
         {
             Services.TableServices.DealRiver(tableVm.MainTable);
             tableVm.OnPropertyChanged(nameof(tableVm.CommunityVM));
             tableVm.CommunityVM.RefreshImageSources();
+            tableVm.MainTable.State = TableState.River;
+            SetMainButton();
         }
     }
 }

@@ -8,15 +8,20 @@
         <StackLayout x:Name="MainTableLayout"
                      BackgroundColor="ForestGreen" 
                      Padding="10" 
-                     Orientation="Vertical"
-                     >
-            <StackLayout VerticalOptions="Start" Orientation="Horizontal">
-                <Button Text="Hands" Command="{Binding DealNewRandomHandsCommand}" BackgroundColor="Wheat"/>
-                <Button Text="Flop" Command="{Binding DealFlopCommand}" BackgroundColor="Yellow"/>
-                <Button Text="Trun" Command="{Binding DealTurnCommand}" BackgroundColor="Green"/>
-                <Button Text="River" Command="{Binding DealRiverCommand}" BackgroundColor="Red"/>
+                     Orientation="Vertical" >
+
+            <views:TableContentView x:Name="TableCV" VerticalOptions="EndAndExpand" />
+            <Label BackgroundColor="White" LineBreakMode="WordWrap" FontSize="Small"
+                     VerticalOptions="EndAndExpand"
+                   Text="{Binding HandsInfoText}" />
+            <StackLayout VerticalOptions="End" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="{Binding MainButtonText}" 
+                        Command="{Binding MainButtonCommand}" 
+                        BackgroundColor="{Binding MainButtonBkgColor}" 
+                        Margin="10"
+                        HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <views:TableContentView x:Name="TableCV" VerticalOptions="End" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -19,6 +19,7 @@ namespace PokerGuess.Views
             BindingContext = vm;
             InitializeComponent();
             vm.TableVm = TableCV.BindingContext as PokerGuess.ViewModels.TableViewVM;
+            vm.SetMainButton();
         }
 	}
 }
