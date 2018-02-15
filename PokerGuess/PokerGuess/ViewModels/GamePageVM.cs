@@ -36,9 +36,11 @@ namespace PokerGuess.ViewModels
         private void DealNewRandomHands()
         {
             Services.TableServices.RemoveAllHandsFromTable(tableVm.MainTable);
+            Services.TableServices.ClearCommunityCards(tableVm.MainTable);
             Services.TableServices.PutHandsOnTable(tableVm.MainTable, new Random().Next(2, tableVm.MainTable.MaxHands +1));
             tableVm.OnPropertyChanged(nameof(tableVm.MainTable));
             tableVm.RefreshHandViews();
+            tableVm.CommunityVM.RefreshImageSources();
             tableVm.MainTable.OnPropertyChanged(nameof(tableVm.MainTable.Hands));
         }
 

@@ -18,15 +18,7 @@ namespace PokerGuess.ViewModels
         public ImageSource Flop3 { get { return flop3; } set { flop3 = value; OnPropertyChanged(nameof(Flop3)); } }
         public ImageSource Turn { get { return turn; } set { turn = value; OnPropertyChanged(nameof(Turn)); } }
         public ImageSource River { get { return river; } set { river = value; OnPropertyChanged(nameof(River)); } }
-
-        private string c1;
-        public string C1 { get { return c1; }
-            set {
-                c1 = value;
-                OnPropertyChanged(nameof(C1));
-            }
-        }
-
+        
         public CommunityViewVM()
         {
             OnPropertyChanged(nameof(Community));
@@ -36,13 +28,19 @@ namespace PokerGuess.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
         public void RefreshImageSources()
         {
+            if (Community.Cards.Count < 1)
+            {
+                Flop1 = null;
+                Flop2 = null;
+                Flop3 = null;
+                Turn = null;
+                River = null;
+            }
             if (Community.Cards.Count >= 1)
             {
                 Flop1 = ImageSource.FromResource(Community.Cards[0].SmallImagePath);
-                C1 = Community.Cards[0].ShortName;
             }
             if (Community.Cards.Count >= 2)
                 Flop2 = ImageSource.FromResource(Community.Cards[1].SmallImagePath);
