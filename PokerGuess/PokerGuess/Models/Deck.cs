@@ -23,7 +23,7 @@ namespace PokerGuess.Models
                     Card c = new Card
                     {
                         Order = o,
-                        Suite = (Suite)s,
+                        Suit = (Suit)s,
                         Value = v
                     };
                     Cards.Add(c);

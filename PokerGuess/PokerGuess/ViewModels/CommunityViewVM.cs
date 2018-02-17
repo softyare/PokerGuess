@@ -50,12 +50,6 @@ namespace PokerGuess.ViewModels
                 Turn = ImageSource.FromResource(Community.Cards[3].SmallImagePath);
             if (Community.Cards.Count == 5)
                 River = ImageSource.FromResource(Community.Cards[4].SmallImagePath);
-
-            OnPropertyChanged(nameof(Flop1));
-            OnPropertyChanged(nameof(Flop2));
-            OnPropertyChanged(nameof(Flop3));
-            OnPropertyChanged(nameof(Turn));
-            OnPropertyChanged(nameof(River));
         }
     }
 }

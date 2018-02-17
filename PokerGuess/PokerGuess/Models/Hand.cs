@@ -67,7 +67,7 @@ namespace PokerGuess.Models
                     }
 
                     // Check suited/unsuited
-                    if (card1.Suite == card2.Suite)
+                    if (card1.Suit == card2.Suit)
                     {
                         result.Add(HandType.suited);
                     }
@@ -134,12 +134,12 @@ namespace PokerGuess.Models
                     }
 
                     // Check if suited
-                    if (card1.Suite == card2.Suite)
+                    if (card1.Suit == card2.Suit)
                     {
-                        return "Suited " + card1.ShortName + card2.ShortName;
+                        return "Suited " + card1.Initial + card2.Initial;
                     } else
                     {
-                        return card1.ShortName + card2.ShortName + " off suite";
+                        return card1.Initial + card2.Initial + " off suite";
                     }
 
                 } else
@@ -165,6 +165,11 @@ namespace PokerGuess.Models
                 }
                 return result.ToString();
             }
+        }
+
+        public override string ToString()
+        {
+            return TypeDetail + " [" + Types + "]";
         }
     }
 }

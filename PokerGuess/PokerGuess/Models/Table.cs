@@ -18,6 +18,7 @@ namespace PokerGuess.Models
 
         public Deck DeckOfCards { get; set; }
         public CommunityCards Community { get; set; }
+        public List<PokerCombination> PokerCombinations { get; set; }
         public int MaxHands { get; private set; }
         private TableState _state;
         public TableState State { get => _state;
@@ -41,6 +42,7 @@ namespace PokerGuess.Models
         public Table(int maxHands)
         {
             Hands = new List<Hand>();
+            PokerCombinations = new List<PokerCombination>();
             State = TableState.Empty;
             MaxHands = maxHands;
             DeckOfCards = new Deck();

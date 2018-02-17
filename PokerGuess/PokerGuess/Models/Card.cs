@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PokerGuess.Models
 {
-    public enum Suite
+    public enum Suit
     {
         Clubs=0, Diamonds=1, Hearts=2, Spades=3
     }
@@ -13,7 +13,7 @@ namespace PokerGuess.Models
     public class Card
     {
         public int Value { get; set; }
-        public Suite Suite { get; set; }
+        public Suit Suit { get; set; }
         public int Order { get; set; }
         public string ImagePath
         {
@@ -36,7 +36,7 @@ namespace PokerGuess.Models
             }
         }
 
-        public string ShortName
+        public string Initial
         {
             get
             {
@@ -62,7 +62,61 @@ namespace PokerGuess.Models
                             break;
                     } 
                 }
-                     
+                return shortName;
+            }
+        }
+
+        public string FirstName
+        {
+            get
+            {
+                string shortName = Value.ToString();
+                if (Value > 10)
+                {
+                    switch (Value)
+                    {
+                        case 11:
+                            shortName = "Jack";
+                            break;
+                        case 12:
+                            shortName = "Queen";
+                            break;
+                        case 13:
+                            shortName = "King";
+                            break;
+                        case 14:
+                            shortName = "Ace";
+                            break;
+                    }
+                }
+                return shortName;
+            }
+        }
+
+        public string FirstNamePlural
+        {
+            get
+            {
+                string shortName = Value.ToString() + "'s";
+                if (Value > 10)
+                {
+                    switch (Value)
+                    {
+                        case 11:
+                            shortName = "Jacks";
+                            break;
+                        case 12:
+                            shortName = "Queens";
+                            break;
+                        case 13:
+                            shortName = "Kings";
+                            break;
+                        case 14:
+                            shortName = "Aces";
+                            break;
+                    }
+                }
+
                 return shortName;
             }
         }
@@ -88,7 +142,7 @@ namespace PokerGuess.Models
                     value = Value.ToString();
                     break;
             }
-            return value + " of " + Suite.ToString();
+            return value + " of " + Suit.ToString();
         }
     }
 }

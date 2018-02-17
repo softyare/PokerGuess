@@ -119,31 +119,71 @@ namespace PokerGuess.ViewModels
             tableVm.CommunityVM.RefreshImageSources();
             tableVm.MainTable.OnPropertyChanged(nameof(tableVm.MainTable.Hands));
             tableVm.MainTable.State = TableState.PreFlop;
+            GetHandsInfo();
             SetMainButton();
+        }
+
+        private void ClearHandsInfo()
+        {
+            HandsInfoText = "";
+        }
+
+        private void GetCombinationsInfo()
+        {
+            if (Services.TableServices.GetPokerCombinations(tableVm.MainTable))
+            {
+                var text = new StringBuilder();
+                foreach(PokerCombination pc in tableVm.MainTable.PokerCombinations)
+                {
+                    text.Append("Hand " + (pc.Hand.IndexOnTable + 1).ToString() + ": " + pc.ToString() + "\n");
+                }
+                HandsInfoText = text.ToString();
+            }  
+            else
+            {
+                HandsInfoText = "";
+            }
+        }
+
+        private void GetHandsInfo()
+        {
+            if (tableVm.MainTable.Hands.Count > 0)
+            {
+                var text = new StringBuilder();
+                foreach (Hand h in tableVm.MainTable.Hands)
+                {
+                    text.Append("Hand " + (h.IndexOnTable +1).ToString() + ": " + h.ToString() + "\n");
+                }
+                HandsInfoText = text.ToString();
+            }
+            else
+            {
+                HandsInfoText = "";
+            }
         }
 
         private void DealFlop()
         {
             Services.TableServices.DealFlop(tableVm.MainTable);
-            tableVm.OnPropertyChanged(nameof(tableVm.CommunityVM));
             tableVm.CommunityVM.RefreshImageSources();
             tableVm.MainTable.State = TableState.Flop;
+            GetCombinationsInfo();
             SetMainButton();
         }
         private void DealTurn()
         {
             Services.TableServices.DealTurn(tableVm.MainTable);
-            tableVm.OnPropertyChanged(nameof(tableVm.CommunityVM));
             tableVm.CommunityVM.RefreshImageSources();
             tableVm.MainTable.State = TableState.Turn;
+            GetCombinationsInfo();
             SetMainButton();
         }
         private void DealRiver()
         {
             Services.TableServices.DealRiver(tableVm.MainTable);
-            tableVm.OnPropertyChanged(nameof(tableVm.CommunityVM));
             tableVm.CommunityVM.RefreshImageSources();
             tableVm.MainTable.State = TableState.River;
+            GetCombinationsInfo();
             SetMainButton();
         }
     }
