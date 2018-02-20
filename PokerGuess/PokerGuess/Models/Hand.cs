@@ -15,6 +15,24 @@ namespace PokerGuess.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public Hand()
+        {
+            IsSelected = false;
+        }
+
+        public Table Table { get; set; }
+
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
         public int IndexOnTable { get; set; }
         private List<Card> _cards;
         public List<Card> Cards { get { return _cards; }
@@ -57,7 +75,11 @@ namespace PokerGuess.Models
                     {
                         result.Add(HandType.middle);
                     }
-                    else if (card1.Value < 6 && card2.Value < 6)
+                    else if (
+                        (card1.Value < 6 && card2.Value < 6)
+                        || (card1.Value < 6 && card2.Value==14)
+                        || (card1.Value ==14 && card2.Value < 6)
+                        )
                     {
                         result.Add(HandType.small);
                     }

@@ -39,6 +39,28 @@ namespace PokerGuess.Models
             }
         }
 
+        private bool hasSelectedHands;
+        public bool HasSelectedHands
+        {
+            get
+            {
+                hasSelectedHands = false;
+                foreach (Hand h in Hands)
+                {
+                    if (h.IsSelected)
+                    {
+                        hasSelectedHands = true;
+                    }
+                }
+                return hasSelectedHands;
+            }
+            set
+            {
+                hasSelectedHands = value;
+                OnPropertyChanged(nameof(HasSelectedHands));
+            }
+        }
+
         public Table(int maxHands)
         {
             Hands = new List<Hand>();

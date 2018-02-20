@@ -3,49 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:PokerGuess.Views"
              x:Class="PokerGuess.Views.TableContentView">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Label Text=" " Grid.Column="10" />
-        <views:HoldemHandContentView Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" BindingContext="{Binding Hand1vm}"/>
-        <Button FontSize="Micro" Text="Hand 1" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Command="SelectHandCommand" />
+    
+    <AbsoluteLayout
+        AbsoluteLayout.LayoutFlags="All"
+        AbsoluteLayout.LayoutBounds="0.0,0.0,1.0,1.0">
         
-        <views:HoldemHandContentView Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="0" BindingContext="{Binding Hand2vm}"/>
-        <Button FontSize="Micro" Text="Hand 2" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" Command="SelectHandCommand" />
-        
-        <views:HoldemHandContentView Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="2" BindingContext="{Binding Hand3vm}"/>
-        <Button FontSize="Micro" Text="Hand 3" Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="3" Command="SelectHandCommand" />
-        
-        <views:HoldemHandContentView Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="4" BindingContext="{Binding Hand4vm}"/>
-        <Button FontSize="Micro" Text="Hand 4" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="5" Command="SelectHandCommand" />
-        
-        <views:HoldemHandContentView Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" BindingContext="{Binding Hand5vm}"/>
-        <Button FontSize="Micro" Text="Hand 5" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" Command="SelectHandCommand" />
-        
-        <views:HoldemHandContentView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" BindingContext="{Binding Hand6vm}"/>
-        <Button FontSize="Micro" Text="Hand 6" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Command="SelectHandCommand" />
+        <Image x:Name="TableImage" Source="{Binding TableImageSource}"
+               Aspect="AspectFit"
+               AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 0.4"
+               AbsoluteLayout.LayoutFlags="All"/>
 
-        <views:CommunityContentView x:Name="CommunityContent"  Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="4" />
-    </Grid>
+
+        <views:HoldemHandContentView BindingContext="{Binding Hand1vm}"
+               AbsoluteLayout.LayoutBounds="0.32, 0.04"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <views:HoldemHandContentView BindingContext="{Binding Hand2vm}"
+               AbsoluteLayout.LayoutBounds="0.68, 0.04"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <views:HoldemHandContentView BindingContext="{Binding Hand3vm}"
+               AbsoluteLayout.LayoutBounds="0.95, 0.17"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <views:HoldemHandContentView BindingContext="{Binding Hand4vm}"
+               AbsoluteLayout.LayoutBounds="0.68, 0.3"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <views:HoldemHandContentView BindingContext="{Binding Hand5vm}"
+               AbsoluteLayout.LayoutBounds="0.32, 0.3"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <views:HoldemHandContentView BindingContext="{Binding Hand6vm}"
+               AbsoluteLayout.LayoutBounds="0.02, 0.17"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <views:CommunityContentView x:Name="CommunityContent"
+               AbsoluteLayout.LayoutBounds="0.5, 0.17"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+    </AbsoluteLayout>
+    
 </ContentView>

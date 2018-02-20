@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace PokerGuess.Models
         UnSet=-1, HighCard=0, APair=1, TwoPairs=2, ThreeOfAKind=4, Straight=5, Flush=6, FullHouse=7, FourOfAKind=8, StraightFlush=9, RoyalFlush=10
     }
 
-    public class PokerCombination
+    public class PokerCombination : IComparable<PokerCombination>
     {
         public List<Card> SortedCards { get; set; }
         public Combination CombinationType { get; set; }
@@ -181,6 +182,106 @@ namespace PokerGuess.Models
                 }
             }
             return "Not set";
+        }
+
+        public int CompareTo(PokerCombination other)
+        {
+            try
+            {
+                if (CombinationType == other.CombinationType)
+                {
+                    if (HighCard.Value == other.HighCard.Value)
+                    {
+                        switch (CombinationType)
+                        {
+                            case Combination.HighCard:
+                                if (Kickers[0].Value == other.Kickers[0].Value)
+                                {
+                                    if (Kickers[1].Value == other.Kickers[1].Value)
+                                    {
+                                        if (Kickers[2].Value == other.Kickers[2].Value)
+                                        {
+                                           return Kickers[3].Value.CompareTo(other.Kickers[3].Value);
+                                        }
+                                        else
+                                            return Kickers[2].Value.CompareTo(other.Kickers[2].Value);
+                                    }
+                                    else
+                                        return Kickers[1].Value.CompareTo(other.Kickers[1].Value);
+                                }
+                                else
+                                    return Kickers[0].Value.CompareTo(other.Kickers[0].Value);
+
+                            case Combination.APair:
+                                if (Kickers[0].Value == other.Kickers[0].Value)
+                                {
+                                    if (Kickers[1].Value == other.Kickers[1].Value)
+                                    {
+                                         return Kickers[2].Value.CompareTo(other.Kickers[2].Value);
+                                    }
+                                    else return Kickers[1].Value.CompareTo(other.Kickers[1].Value);
+                                }
+                                else return Kickers[0].Value.CompareTo(other.Kickers[0].Value);
+
+                            case Combination.TwoPairs:
+                                if (LowGroup[0].Value == other.LowGroup[0].Value)
+                                {
+                                    return Kickers[0].Value.CompareTo(other.Kickers[0].Value);
+                                }
+                                else
+                                    return LowGroup[0].Value.CompareTo(other.LowGroup[0].Value);
+
+                            case Combination.ThreeOfAKind:
+                                if (Kickers[0].Value == other.Kickers[0].Value)
+                                {
+                                    return Kickers[1].Value.CompareTo(other.Kickers[1].Value);
+                                }
+                                else return Kickers[0].Value.CompareTo(other.Kickers[0].Value);
+
+                            case Combination.Straight:
+                                for (int i = 1; i < HighGroup.Count; i++)
+                                {
+                                    if (HighGroup[i].Value != other.HighGroup[i].Value)
+                                    {
+                                        return HighGroup[i].Value.CompareTo(other.HighGroup[i].Value);
+                                    }
+                                }
+                                return HighCard.Value.CompareTo(other.HighCard.Value);
+
+                            case Combination.Flush:
+                                for (int i = 1; i < HighGroup.Count; i++)
+                                {
+                                    if (HighGroup[i].Value != other.HighGroup[i].Value)
+                                    {
+                                        return HighGroup[i].Value.CompareTo(other.HighGroup[i].Value);
+                                    }
+                                }
+                                return HighCard.Value.CompareTo(other.HighCard.Value);
+
+                            case Combination.FullHouse:
+                                return LowGroup[0].Value.CompareTo(other.LowGroup[0].Value);
+
+                            case Combination.FourOfAKind:
+                                return Kickers[0].Value.CompareTo(other.Kickers[0].Value);
+
+                            default:
+                                return HighCard.Value.CompareTo(other.HighCard.Value);
+                        }
+                    }
+                    else
+                    {
+                        return HighCard.Value.CompareTo(other.HighCard.Value);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Neuspjela komparacija!");
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine("COMBINATION: " + ToString());
+            }
+
+            return CombinationType.CompareTo(other.CombinationType);
         }
     }
 }

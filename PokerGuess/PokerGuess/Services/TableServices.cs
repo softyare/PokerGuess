@@ -17,6 +17,7 @@ namespace PokerGuess.Services
                 {
                     Hand h = DeckServices.DrawHoldemHand(table.DeckOfCards);
                     h.IndexOnTable = i;
+                    h.Table = table;
                     table.Hands.Add(h);
                 }
                 return true;

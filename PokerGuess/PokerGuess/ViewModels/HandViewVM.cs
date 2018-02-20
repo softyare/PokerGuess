@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using PokerGuess.Models;
 using Xamarin.Forms;
 
@@ -15,30 +16,48 @@ namespace PokerGuess.ViewModels
         }
 
         private Hand _hand;
-        public Hand CurrnetHand
+        public Hand CurrentHand
         {
             get { return _hand; }
             set
             {
                 _hand = value;
-                OnPropertyChanged(nameof(CurrnetHand));
+                OnPropertyChanged(nameof(CurrentHand));
                 OnPropertyChanged(nameof(Card1Image));
                 OnPropertyChanged(nameof(Card2Image));
             }
         }
 
+        public ImageSource HandBkgImageSource { get { return ImageSource.FromResource("PokerGuess.Resources.HandHolder.png"); } }
+
+        public Command HandTapCommand { get; set; }
+
         public HandViewVM(Hand hand)
         {
-            CurrnetHand = hand;
+            CurrentHand = hand;
+            HandTapCommand = new Command(HandTap);
+        }
+
+        private void HandTap(object obj)
+        {
+            if (Services.GameServices.SelectedHand != null)
+            {
+                if (Services.GameServices.SelectedHand != CurrentHand)
+                {
+                    Services.GameServices.SelectedHand.IsSelected = false;
+                }
+            }
+            CurrentHand.IsSelected = true;
+            Services.GameServices.SelectedHand = CurrentHand;
         }
 
         public ImageSource Card1Image
         {
             get
             {
-                if (CurrnetHand.Cards.Count > 0)
+                if (CurrentHand.Cards.Count > 0)
                 {
-                    return ImageSource.FromResource(CurrnetHand.Cards[0].SmallImagePath);
+                    return ImageSource.FromResource(CurrentHand.Cards[0].SmallImagePath);
                 }
                 else
                     return null;
@@ -48,9 +67,9 @@ namespace PokerGuess.ViewModels
         {
             get
             {
-                if (CurrnetHand.Cards.Count > 1)
+                if (CurrentHand.Cards.Count > 1)
                 {
-                    return ImageSource.FromResource(CurrnetHand.Cards[1].SmallImagePath);
+                    return ImageSource.FromResource(CurrentHand.Cards[1].SmallImagePath);
                 }
                 else
                     return null;
@@ -60,9 +79,9 @@ namespace PokerGuess.ViewModels
         {
             get
             {
-                if (CurrnetHand.Cards.Count > 2)
+                if (CurrentHand.Cards.Count > 2)
                 {
-                    return ImageSource.FromResource(CurrnetHand.Cards[2].SmallImagePath);
+                    return ImageSource.FromResource(CurrentHand.Cards[2].SmallImagePath);
                 }
                 else
                     return null;
@@ -72,9 +91,9 @@ namespace PokerGuess.ViewModels
         {
             get
             {
-                if (CurrnetHand.Cards.Count > 3)
+                if (CurrentHand.Cards.Count > 3)
                 {
-                    return ImageSource.FromResource(CurrnetHand.Cards[3].SmallImagePath);
+                    return ImageSource.FromResource(CurrentHand.Cards[3].SmallImagePath);
                 }
                 else
                     return null;
@@ -84,9 +103,9 @@ namespace PokerGuess.ViewModels
         {
             get
             {
-                if (CurrnetHand.Cards.Count > 4)
+                if (CurrentHand.Cards.Count > 4)
                 {
-                    return ImageSource.FromResource(CurrnetHand.Cards[4].SmallImagePath);
+                    return ImageSource.FromResource(CurrentHand.Cards[4].SmallImagePath);
                 }
                 else
                     return null;

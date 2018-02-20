@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace PokerGuess.ViewModels
 {
@@ -24,6 +25,17 @@ namespace PokerGuess.ViewModels
         public HandViewVM Hand4vm { get; set; }
         public HandViewVM Hand5vm { get; set; }
         public HandViewVM Hand6vm { get; set; }
+
+        private ImageSource tableImageSource = ImageSource.FromResource("PokerGuess.Resources.Table.png");
+        public ImageSource TableImageSource
+        {
+            get { return tableImageSource; }
+            set
+            {
+                tableImageSource = value;
+                OnPropertyChanged(nameof(TableImageSource));
+            }
+        }
 
         public TableViewVM()
         {

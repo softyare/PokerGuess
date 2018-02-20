@@ -6,24 +6,37 @@
              VerticalOptions="FillAndExpand"
              >
   <ContentView.Content>
+        <AbsoluteLayout>
+            
+            <Image x:Name="HandBkg" Source="{Binding HandBkgImageSource}"
+               Aspect="Fill"
+               AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+               AbsoluteLayout.LayoutFlags="All"
+                   IsVisible="{Binding CurrentHand.IsSelected}"/>
+            
         <StackLayout HorizontalOptions="FillAndExpand" 
                              VerticalOptions="FillAndExpand"
-                             BackgroundColor="DarkGreen"
-                             WidthRequest="60"
-                             MinimumWidthRequest="60"
-                             Orientation="Horizontal">
+                             Orientation="Horizontal"
+               AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+               AbsoluteLayout.LayoutFlags="All"
+                     Padding="16,14">
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding HandTapCommand}" />    
+            </StackLayout.GestureRecognizers>
+            
             <Image Source="{Binding Card1Image}" 
-                               WidthRequest="24"
-                               Aspect="AspectFit"
-                               Margin="5,5,1,5"
-                               HorizontalOptions="EndAndExpand"
-                                VerticalOptions="EndAndExpand"/>
+                               WidthRequest="27"
+                               Aspect="AspectFill"
+                               HorizontalOptions="Start"
+                                VerticalOptions="Start"/>
             <Image Source="{Binding Card2Image}" 
-                               WidthRequest="24"
-                               Aspect="AspectFit"
-                               Margin="1,5,5,5"
-                               HorizontalOptions="EndAndExpand"
-                                VerticalOptions="EndAndExpand"/>
+                               WidthRequest="27"
+                               Aspect="AspectFill"
+                               HorizontalOptions="Start"
+                                VerticalOptions="Start"/>
         </StackLayout>
+        </AbsoluteLayout>
     </ContentView.Content>
 </ContentView>

@@ -3,25 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PokerGuess.Views.GamePage"
              xmlns:views="clr-namespace:PokerGuess.Views"
-             Padding="5,15,5,5">
+             Padding="5,20,5,5">
     <ContentPage.Content>
-        <StackLayout x:Name="MainTableLayout"
-                     BackgroundColor="ForestGreen" 
-                     Padding="10" 
-                     Orientation="Vertical" >
+        
+        <AbsoluteLayout x:Name="MainTableLayout"
+               AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+               AbsoluteLayout.LayoutFlags="All">
 
-            <views:TableContentView x:Name="TableCV" VerticalOptions="EndAndExpand" />
-            <Label BackgroundColor="White" LineBreakMode="WordWrap" FontSize="Small"
+            <Image x:Name="BgImage" Source="{Binding BkgImageSource}"
+               Aspect="AspectFill"
+               AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+            <views:TableContentView x:Name="TableCV" 
+                                    AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+                                    AbsoluteLayout.LayoutFlags="All" />
+            
+            <StackLayout Orientation="Vertical"
+                         AbsoluteLayout.LayoutBounds="0.0, 1, 1.0, 0.6"
+                         AbsoluteLayout.LayoutFlags="All" >
+                
+                <Label BackgroundColor="White" LineBreakMode="WordWrap" 
+                       FontSize="Small"
+                       Margin="10"
                      VerticalOptions="EndAndExpand"
                    Text="{Binding HandsInfoText}" />
-            <StackLayout VerticalOptions="End" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                
                 <Button Text="{Binding MainButtonText}" 
                         Command="{Binding MainButtonCommand}" 
                         BackgroundColor="{Binding MainButtonBkgColor}" 
                         Margin="10"
-                        HorizontalOptions="FillAndExpand"/>
+                        VerticalOptions="End"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding TableVm.MainTable.HasSelectedHands}"/>
+                
             </StackLayout>
 
-        </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

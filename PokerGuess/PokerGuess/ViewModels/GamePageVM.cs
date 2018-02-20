@@ -25,6 +25,17 @@ namespace PokerGuess.ViewModels
         public Command DealRiverCommand { get; set; }
         public Command DealFlopCommand { get; set; }
 
+        private ImageSource bkgImageSource = ImageSource.FromResource("PokerGuess.Resources.BlueGradBkg.png");
+        public ImageSource BkgImageSource
+        {
+            get { return bkgImageSource; }
+            set
+            {
+                bkgImageSource = value;
+                OnPropertyChanged(nameof(BkgImageSource));
+            }
+        }
+
         private string handsInfoText;
         public string HandsInfoText
         {
@@ -133,7 +144,9 @@ namespace PokerGuess.ViewModels
             if (Services.TableServices.GetPokerCombinations(tableVm.MainTable))
             {
                 var text = new StringBuilder();
-                foreach(PokerCombination pc in tableVm.MainTable.PokerCombinations)
+                tableVm.MainTable.PokerCombinations.Sort();
+                tableVm.MainTable.PokerCombinations.Reverse();
+                foreach (PokerCombination pc in tableVm.MainTable.PokerCombinations)
                 {
                     text.Append("Hand " + (pc.Hand.IndexOnTable + 1).ToString() + ": " + pc.ToString() + "\n");
                 }
