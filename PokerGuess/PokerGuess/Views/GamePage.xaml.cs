@@ -16,10 +16,11 @@ namespace PokerGuess.Views
         public GamePage ()
 		{
             vm = new PokerGuess.ViewModels.GamePageVM();
-            BindingContext = vm;
+            Services.GameServices.GamePageViewModel = vm;
+            BindingContext = Services.GameServices.GamePageViewModel;
             InitializeComponent();
-            vm.TableVm = TableCV.BindingContext as PokerGuess.ViewModels.TableViewVM;
-            vm.SetMainButton();
+            Services.GameServices.GamePageViewModel.TableVm = TableCV.BindingContext as ViewModels.TableViewVM;
+            Services.GameServices.GamePageViewModel.SetMainButton();
         }
 	}
 }

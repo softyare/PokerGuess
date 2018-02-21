@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PokerGuess.Views.GamePage"
-             xmlns:views="clr-namespace:PokerGuess.Views"
-             Padding="5,20,5,5">
+             xmlns:views="clr-namespace:PokerGuess.Views">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Content>
         
         <AbsoluteLayout x:Name="MainTableLayout"
@@ -22,12 +26,19 @@
             <StackLayout Orientation="Vertical"
                          AbsoluteLayout.LayoutBounds="0.0, 1, 1.0, 0.6"
                          AbsoluteLayout.LayoutFlags="All" >
-                
+
                 <Label BackgroundColor="White" LineBreakMode="WordWrap" 
                        FontSize="Small"
                        Margin="10"
-                     VerticalOptions="EndAndExpand"
+                     VerticalOptions="StartAndExpand"
                    Text="{Binding HandsInfoText}" />
+
+                <Label LineBreakMode="WordWrap" 
+                       FontSize="Medium"
+                       Margin="10"
+                       TextColor="GreenYellow"
+                     VerticalOptions="StartAndExpand"
+                   Text="{Binding GameInfoText}" />
                 
                 <Button Text="{Binding MainButtonText}" 
                         Command="{Binding MainButtonCommand}" 
@@ -35,7 +46,7 @@
                         Margin="10"
                         VerticalOptions="End"
                         HorizontalOptions="FillAndExpand"
-                        IsVisible="{Binding TableVm.MainTable.HasSelectedHands}"/>
+                        IsVisible="{Binding MainTable.HasSelectedHands}"/>
                 
             </StackLayout>
 

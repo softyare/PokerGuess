@@ -19,6 +19,7 @@ namespace PokerGuess.Models
         public Deck DeckOfCards { get; set; }
         public CommunityCards Community { get; set; }
         public List<PokerCombination> PokerCombinations { get; set; }
+        public List<Hand> WinningHands { get; set; }
         public int MaxHands { get; private set; }
         private TableState _state;
         public TableState State { get => _state;
@@ -44,14 +45,6 @@ namespace PokerGuess.Models
         {
             get
             {
-                hasSelectedHands = false;
-                foreach (Hand h in Hands)
-                {
-                    if (h.IsSelected)
-                    {
-                        hasSelectedHands = true;
-                    }
-                }
                 return hasSelectedHands;
             }
             set
@@ -65,6 +58,7 @@ namespace PokerGuess.Models
         {
             Hands = new List<Hand>();
             PokerCombinations = new List<PokerCombination>();
+            WinningHands = new List<Hand>();
             State = TableState.Empty;
             MaxHands = maxHands;
             DeckOfCards = new Deck();

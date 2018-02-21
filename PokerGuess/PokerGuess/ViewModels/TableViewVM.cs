@@ -15,9 +15,9 @@ namespace PokerGuess.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public CommunityViewVM CommunityVM { get; set; }
-
         public Table MainTable { get; set; }
+
+        public CommunityViewVM CommunityVM { get; set; }
 
         public HandViewVM Hand1vm { get; set; }
         public HandViewVM Hand2vm { get; set; }
@@ -39,11 +39,7 @@ namespace PokerGuess.ViewModels
 
         public TableViewVM()
         {
-            MainTable = new Table(6)
-            {
-                DeckOfCards = new Deck(),
-                State = TableState.Empty
-            };
+            MainTable = Services.GameServices.MainTable;
             Services.DeckServices.Shuffle(MainTable.DeckOfCards);
         }
 

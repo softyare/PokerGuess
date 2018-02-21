@@ -9,15 +9,18 @@ using System.Windows.Input;
 
 namespace PokerGuess.ViewModels
 {
-    class GamePageVM : INotifyPropertyChanged
+    public class GamePageVM : INotifyPropertyChanged
     {
-        private PokerGuess.ViewModels.TableViewVM tableVm;
-        public TableViewVM TableVm { get => tableVm; set => tableVm = value; }
+        public TableViewVM TableVm { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Table MainTable { get { return Services.GameServices.MainTable; }
+                                 set { Services.GameServices.MainTable = value; }
         }
 
         public Command DealNewRandomHandsCommand { get; set; }
@@ -44,6 +47,17 @@ namespace PokerGuess.ViewModels
             {
                 handsInfoText = value;
                 OnPropertyChanged(nameof(HandsInfoText));
+            }
+        }
+
+        private string gameInfoText;
+        public string GameInfoText
+        {
+            get { return gameInfoText; }
+            set
+            {
+                gameInfoText = value;
+                OnPropertyChanged(nameof(GameInfoText));
             }
         }
 
@@ -86,11 +100,22 @@ namespace PokerGuess.ViewModels
             DealTurnCommand = new Command(DealTurn);
             DealRiverCommand = new Command(DealRiver);
             DealFlopCommand = new Command(DealFlop);
+
+            // KREIRANJE TABLE
+            var t = new Table(6)
+            {
+                DeckOfCards = new Deck(),
+                State = TableState.Empty,
+                HasSelectedHands = true
+            };
+            Services.GameServices.MainTable = t;
+
+            Services.GameServices.CurrentScore = 0;
         }
 
         public void SetMainButton()
         {
-            switch(tableVm.MainTable.State)
+            switch(TableVm.MainTable.State)
             {
                 case TableState.Empty:
                     MainButtonCommand = DealNewRandomHandsCommand;
@@ -105,12 +130,12 @@ namespace PokerGuess.ViewModels
                 case TableState.Flop:
                     MainButtonCommand = DealTurnCommand;
                     MainButtonText = "Deal Turn";
-                    MainButtonBkgColor = Color.Orange;
+                    MainButtonBkgColor = Color.GreenYellow;
                     break;
                 case TableState.Turn:
                     MainButtonCommand = DealRiverCommand;
                     MainButtonText = "Deal River";
-                    MainButtonBkgColor = Color.PaleVioletRed;
+                    MainButtonBkgColor = Color.LightGreen;
                     break;
                 case TableState.River:
                     MainButtonCommand = DealNewRandomHandsCommand;
@@ -122,31 +147,34 @@ namespace PokerGuess.ViewModels
 
         private void DealNewRandomHands()
         {
-            Services.TableServices.RemoveAllHandsFromTable(tableVm.MainTable);
-            Services.TableServices.ClearCommunityCards(tableVm.MainTable);
-            Services.TableServices.PutHandsOnTable(tableVm.MainTable, new Random().Next(2, tableVm.MainTable.MaxHands +1));
-            tableVm.OnPropertyChanged(nameof(tableVm.MainTable));
-            tableVm.RefreshHandViews();
-            tableVm.CommunityVM.RefreshImageSources();
-            tableVm.MainTable.OnPropertyChanged(nameof(tableVm.MainTable.Hands));
-            tableVm.MainTable.State = TableState.PreFlop;
+            Services.GameServices.SelectedHand = null;
+            Services.TableServices.RemoveAllHandsFromTable(TableVm.MainTable);
+            Services.TableServices.ClearCommunityCards(TableVm.MainTable);
+            Services.TableServices.PutHandsOnTable(TableVm.MainTable, new Random().Next(2, TableVm.MainTable.MaxHands +1));
+            TableVm.OnPropertyChanged(nameof(TableVm.MainTable));
+            TableVm.RefreshHandViews();
+            TableVm.CommunityVM.RefreshImageSources();
+            MainTable.OnPropertyChanged(nameof(TableVm.MainTable.Hands));
+            MainTable.State = TableState.PreFlop;
+            MainTable.HasSelectedHands = false;
             GetHandsInfo();
+            GameInfoText = "Select your hand on table.";
             SetMainButton();
+            Services.GameServices.Bet = Services.GameServices.StartingBet;
         }
 
-        private void ClearHandsInfo()
+        private void ClearInfo()
         {
             HandsInfoText = "";
+            GameInfoText = "";
         }
 
         private void GetCombinationsInfo()
         {
-            if (Services.TableServices.GetPokerCombinations(tableVm.MainTable))
+            if (Services.TableServices.GetPokerCombinations(TableVm.MainTable))
             {
                 var text = new StringBuilder();
-                tableVm.MainTable.PokerCombinations.Sort();
-                tableVm.MainTable.PokerCombinations.Reverse();
-                foreach (PokerCombination pc in tableVm.MainTable.PokerCombinations)
+                foreach (PokerCombination pc in TableVm.MainTable.PokerCombinations)
                 {
                     text.Append("Hand " + (pc.Hand.IndexOnTable + 1).ToString() + ": " + pc.ToString() + "\n");
                 }
@@ -160,10 +188,10 @@ namespace PokerGuess.ViewModels
 
         private void GetHandsInfo()
         {
-            if (tableVm.MainTable.Hands.Count > 0)
+            if (TableVm.MainTable.Hands.Count > 0)
             {
                 var text = new StringBuilder();
-                foreach (Hand h in tableVm.MainTable.Hands)
+                foreach (Hand h in TableVm.MainTable.Hands)
                 {
                     text.Append("Hand " + (h.IndexOnTable +1).ToString() + ": " + h.ToString() + "\n");
                 }
@@ -175,29 +203,90 @@ namespace PokerGuess.ViewModels
             }
         }
 
+        public void GetGameInfo()
+        {
+            StringBuilder result = new StringBuilder();
+            result.Append("Your hand: ");
+            result.Append(Services.GameServices.SelectedHand.TypeDetail + "\n");
+            if((int)Services.GameServices.MainTable.State > 1)
+            {
+                result.Append("Best hands: ");
+                foreach (Hand h in GameServices.MainTable.WinningHands)
+                {
+                    result.Append(MainTable.PokerCombinations[0].Hand.TypeDetail + " | ");
+                }
+                result.Remove(result.Length - 3, 3);
+                result.Append("\n");
+            }
+            if (GameServices.MainTable.State == TableState.River)
+            {
+                if (GameServices.CurrentScore > 0)
+                {
+                    result.Append("Win: $" + Services.GameServices.Bet + "\n");
+                    result.Append("Total win: $" + Services.GameServices.CurrentScore);
+                }
+                else
+                {
+                    result.Append("Your lost! Game over.");
+                }
+            } else
+            {
+                result.Append("Your bet: $" + Services.GameServices.Bet);
+            }
+            GameInfoText = result.ToString();
+        }
+
         private void DealFlop()
         {
-            Services.TableServices.DealFlop(tableVm.MainTable);
-            tableVm.CommunityVM.RefreshImageSources();
-            tableVm.MainTable.State = TableState.Flop;
+            Services.TableServices.DealFlop(TableVm.MainTable);
+            TableVm.CommunityVM.RefreshImageSources();
+            TableVm.MainTable.State = TableState.Flop;
             GetCombinationsInfo();
+            GetGameInfo();
             SetMainButton();
         }
+
         private void DealTurn()
         {
-            Services.TableServices.DealTurn(tableVm.MainTable);
-            tableVm.CommunityVM.RefreshImageSources();
-            tableVm.MainTable.State = TableState.Turn;
+            Services.TableServices.DealTurn(TableVm.MainTable);
+            TableVm.CommunityVM.RefreshImageSources();
+            TableVm.MainTable.State = TableState.Turn;
             GetCombinationsInfo();
+            GetGameInfo();
             SetMainButton();
         }
         private void DealRiver()
         {
-            Services.TableServices.DealRiver(tableVm.MainTable);
-            tableVm.CommunityVM.RefreshImageSources();
-            tableVm.MainTable.State = TableState.River;
+            Services.TableServices.DealRiver(TableVm.MainTable);
+            TableVm.CommunityVM.RefreshImageSources();
+            TableVm.MainTable.State = TableState.River;
             GetCombinationsInfo();
+            CheckGameEnd();
+            GetGameInfo();
             SetMainButton();
+        }
+
+        private void CheckGameEnd()
+        {
+            bool isWinning = false;
+            foreach(Hand h in GameServices.MainTable.WinningHands)
+            {
+                if (h.TypeDetail == GameServices.SelectedHand.TypeDetail)
+                {
+                    isWinning = true;
+                    break;
+                }
+            }
+            if (isWinning)
+            {
+                GameServices.CurrentScore = GameServices.CurrentScore + GameServices.Bet;
+            } 
+            else
+            {
+                GameServices.BestScore = GameServices.CurrentScore;
+                GameServices.CurrentScore = 0;
+            }
+            
         }
     }
 }

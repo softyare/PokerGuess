@@ -10,6 +10,7 @@
         
         <Image x:Name="TableImage" Source="{Binding TableImageSource}"
                Aspect="AspectFit"
+               Margin="0,20,0,0"
                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 0.4"
                AbsoluteLayout.LayoutFlags="All"/>
 

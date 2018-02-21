@@ -98,6 +98,31 @@ namespace PokerGuess.Services
                     }
                 }
             }
+            table.PokerCombinations.Sort();
+            table.PokerCombinations.Reverse();
+
+
+            table.WinningHands.Clear();
+            PokerCombination bestPC = null;
+            bool firstCheck = true;
+            foreach(PokerCombination pc in table.PokerCombinations)
+            {
+                if (firstCheck)
+                {
+                    firstCheck = false;
+                    bestPC = pc;
+                    table.WinningHands.Add(pc.Hand);
+                }
+                else
+                {
+                    if (pc.CompareTo(bestPC) == 0)
+                    {
+                        table.WinningHands.Add(pc.Hand);
+                    }
+                    else
+                        break;
+                }
+            }
             return table.PokerCombinations.Count > 0;
         }
 

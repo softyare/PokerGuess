@@ -45,10 +45,22 @@ namespace PokerGuess.ViewModels
                 if (Services.GameServices.SelectedHand != CurrentHand)
                 {
                     Services.GameServices.SelectedHand.IsSelected = false;
+                    switch (Services.GameServices.MainTable.State)
+                    {
+                        case TableState.Flop:
+                            Services.GameServices.Bet = 5;
+                            break;
+                        case TableState.Turn:
+                            Services.GameServices.Bet = 2;
+                            break;
+
+                    }
                 }
             }
             CurrentHand.IsSelected = true;
+            Services.GameServices.MainTable.HasSelectedHands = true;
             Services.GameServices.SelectedHand = CurrentHand;
+            Services.GameServices.GamePageViewModel.GetGameInfo();
         }
 
         public ImageSource Card1Image
