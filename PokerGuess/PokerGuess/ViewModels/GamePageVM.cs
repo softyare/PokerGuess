@@ -236,7 +236,7 @@ namespace PokerGuess.ViewModels
                 result.Append("Best hands: ");
                 foreach (Hand h in GameServices.MainTable.WinningHands)
                 {
-                    result.Append(MainTable.PokerCombinations[0].Hand.TypeDetail + " | ");
+                    result.Append(h.TypeDetail + " | ");
                 }
                 result.Remove(result.Length - 3, 3);
                 result.Append("\n");
