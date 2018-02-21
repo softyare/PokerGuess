@@ -114,6 +114,8 @@ namespace PokerGuess.ViewModels
             }
         }
 
+        private int tmpScore;
+
         public GamePageVM()
         {
             DealNewRandomHandsCommand = new Command(DealNewRandomHands);
@@ -233,13 +235,14 @@ namespace PokerGuess.ViewModels
             result.Append(Services.GameServices.SelectedHand.TypeDetail + "\n");
             if((int)Services.GameServices.MainTable.State > 1)
             {
-                result.Append("Best hands: ");
+                string sufix = (GameServices.MainTable.WinningHands.Count > 1) ? "s: " : ": ";
+                result.Append("Best hand" + sufix);
                 foreach (Hand h in GameServices.MainTable.WinningHands)
                 {
                     result.Append(h.TypeDetail + " | ");
                 }
                 result.Remove(result.Length - 3, 3);
-                result.Append("\n");
+                result.Append("\n\n");
             }
             if (GameServices.MainTable.State == TableState.River)
             {
@@ -250,7 +253,8 @@ namespace PokerGuess.ViewModels
                 }
                 else
                 {
-                    result.Append("Your lost! Game over.");
+                    result.Append("You lost! Game over.\n");
+                    result.Append("Your score: " + tmpScore);
                 }
             } else
             {
@@ -310,6 +314,7 @@ namespace PokerGuess.ViewModels
             {
                 if (GameServices.CurrentScore > GameServices.BestScore)
                     GameServices.BestScore = GameServices.CurrentScore;
+                tmpScore = GameServices.CurrentScore;
                 GameServices.CurrentScore = 0;
             }
             

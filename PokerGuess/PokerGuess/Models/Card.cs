@@ -46,7 +46,7 @@ namespace PokerGuess.Models
                     switch (Value)
                     {
                         case 10:
-                            shortName = "10";
+                            shortName = "10 ";
                             break;
                         case 11:
                             shortName = "J";
