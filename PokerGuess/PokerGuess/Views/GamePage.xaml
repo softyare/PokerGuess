@@ -22,23 +22,35 @@
             <views:TableContentView x:Name="TableCV" 
                                     AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                                     AbsoluteLayout.LayoutFlags="All" />
+            <Grid Padding="5" ColumnSpacing="5"
+                                    AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 25"
+                                    AbsoluteLayout.LayoutFlags="WidthProportional">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" BackgroundColor="DarkBlue" TextColor="Wheat"
+                       Text="{Binding CurrentScoreText}" />
+                <Label Grid.Column="1" BackgroundColor="BlueViolet" TextColor="MistyRose"
+                       Text="{Binding BestScoreText}" />
+            </Grid>
             
             <StackLayout Orientation="Vertical"
                          AbsoluteLayout.LayoutBounds="0.0, 1, 1.0, 0.6"
                          AbsoluteLayout.LayoutFlags="All" >
 
-                <Label BackgroundColor="White" LineBreakMode="WordWrap" 
-                       FontSize="Small"
-                       Margin="10"
-                     VerticalOptions="StartAndExpand"
-                   Text="{Binding HandsInfoText}" />
-
                 <Label LineBreakMode="WordWrap" 
                        FontSize="Medium"
                        Margin="10"
                        TextColor="GreenYellow"
-                     VerticalOptions="StartAndExpand"
+                     VerticalOptions="Start"
                    Text="{Binding GameInfoText}" />
+
+                <Label TextColor="White" LineBreakMode="WordWrap" 
+                       FontSize="Small"
+                       Margin="10"
+                     VerticalOptions="StartAndExpand"
+                   Text="{Binding HandsInfoText}" />
                 
                 <Button Text="{Binding MainButtonText}" 
                         Command="{Binding MainButtonCommand}" 

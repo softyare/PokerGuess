@@ -39,6 +39,26 @@ namespace PokerGuess.ViewModels
             }
         }
 
+        private string currentScoreText;
+        public string CurrentScoreText
+        {
+            get { return currentScoreText; }
+            set { currentScoreText = value;
+                OnPropertyChanged(nameof(CurrentScoreText));
+            }
+        }
+
+        private string bestScoreText;
+        public string BestScoreText
+        {
+            get { return bestScoreText; }
+            set
+            {
+                bestScoreText = value;
+                OnPropertyChanged(nameof(BestScoreText));
+            }
+        }
+
         private string handsInfoText;
         public string HandsInfoText
         {
@@ -108,9 +128,12 @@ namespace PokerGuess.ViewModels
                 State = TableState.Empty,
                 HasSelectedHands = true
             };
-            Services.GameServices.MainTable = t;
 
+            Services.GameServices.MainTable = t;
             Services.GameServices.CurrentScore = 0;
+
+            CurrentScoreText = "Current score: " + GameServices.CurrentScore.ToString();
+            BestScoreText = "Best score: " + GameServices.BestScore.ToString();
         }
 
         public void SetMainButton()
@@ -263,6 +286,8 @@ namespace PokerGuess.ViewModels
             GetCombinationsInfo();
             CheckGameEnd();
             GetGameInfo();
+            CurrentScoreText = "Current score: " + GameServices.CurrentScore.ToString();
+            BestScoreText = "Best score: " + GameServices.BestScore.ToString();
             SetMainButton();
         }
 
@@ -283,7 +308,8 @@ namespace PokerGuess.ViewModels
             } 
             else
             {
-                GameServices.BestScore = GameServices.CurrentScore;
+                if (GameServices.CurrentScore > GameServices.BestScore)
+                    GameServices.BestScore = GameServices.CurrentScore;
                 GameServices.CurrentScore = 0;
             }
             
